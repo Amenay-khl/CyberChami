@@ -1,0 +1,38 @@
+<div class="map">
+  <yaga-map [lng]="5.724524" [lat]="45.188529" [zoom]="12">
+    <yaga-tile-layer [(url)]="tileLayerUrl"></yaga-tile-layer>
+
+    <yaga-marker #marque *ngFor="let d of combine|async"
+                [lng] = "d.coord[0]"
+                [lat] = "d.coord[1]"
+                [display] = "true"
+                [opacity] = "1"
+    (click)="selected(d.arret)" (blur)="rech()">
+    {{marque.focus()}}
+
+    <yaga-icon *ngIf="d.arret===arretCourant;else sinon"[iconUrl]="iconMarkerSelected"></yaga-icon>
+    <ng-template #sinon>
+      <yaga-icon [iconUrl]="iconMarker"></yaga-icon>
+    </ng-template>
+    <!--Sinon
+    https://www.flaticon.com/premium-icon/icons/svg/2776/2776067.svg
+     <yaga-icon [iconUrl]="iconMarkerSelected"></yaga-icon>
+    -->
+    </yaga-marker>
+    <yaga-polyline
+      *ngFor   = "let ligne of lignes | async"
+      [geoJSON] = "ligne"
+      [color]   = " 'rgb(' + ligne.properties.COULEUR + ')' "
+    >
+
+    <yaga-popup>
+      {{ligne.properties.LIBELLE}}
+    </yaga-popup>
+    </yaga-polyline>
+
+  </yaga-map>
+</div>
+<!--
+<form [formGroup]="myForm" (click)="clickedMe()">
+</form>
+-->

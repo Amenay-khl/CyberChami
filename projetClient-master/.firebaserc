@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "l3m-projetintegrateur": {
+      "hosting": {
+        "amorce-client": [
+          "l3m-projetintegrateur"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "l3m-projetintegrateur"
+  }
+}

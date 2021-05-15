@@ -1,0 +1,45 @@
+:host {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+
+  mat-toolbar {
+    > mat-icon {
+      user-select: none;
+      transition: transform .3s;
+    }
+    > mat-icon:hover {
+      transform: scale(1.4);
+    }
+
+    .imgGoogle {
+      width: 32px;
+      height: 32px;
+      margin-left: -8px;
+      margin-top: 8px;
+      border-radius: 50%;
+      border: solid black 1px;
+    }
+  }
+
+  table {
+    margin-top: 30px;
+  }
+
+  td {
+    vertical-align: top;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  mat-drawer-container {
+    flex: 1 1;
+  }
+}
+
+// tableau cote a cote
+.tableaux{
+  display:inline-block;
+  vertical-align:top;
+}
+

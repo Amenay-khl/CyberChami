@@ -1,0 +1,56 @@
+
+<h1>Mes Visites</h1>
+<!--let item of TDL.items.filter(f)-->
+<div *ngIf="Visites | async as mv">
+  <button [class.selected]="f===fAll" (click)="f = fAll">All</button>
+  <button [class.selected]="f===fRepondu" (click)= "f = fRepondu">Terminer</button>
+  <button [class.selected]="f===fAband" (click)= "f = fAband">Abandonner</button>
+  <button [class.selected]="f===fEnCours" (click)= "f = fEnCours">En cours</button>
+<table mat-table [dataSource]="mv.filter(f)" class="tab_visite">
+
+  <ng-container matColumnDef="refVisite">
+    <th mat-header-cell *matHeaderCellDef>Référence Visite</th>
+    <td mat-cell *matCellDef="let element">{{element.refVisite}}</td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="refDefi">
+    <th mat-header-cell *matHeaderCellDef>Référence Défi</th>
+    <td mat-cell *matCellDef="let element">{{monDefi(element.refDefi).titre}}</td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef>Date</th>
+    <td mat-cell *matCellDef="let element">{{element.date | date: 'dd/MM/yyyy'}}</td>
+    </ng-container>
+
+  <ng-container matColumnDef="mode">
+    <th mat-header-cell *matHeaderCellDef>Mode</th>
+    <td mat-cell *matCellDef="let element">{{element.mode}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="temps">
+    <th mat-header-cell *matHeaderCellDef>Temps</th>
+    <td mat-cell *matCellDef="let element">{{element.temps}}</td>
+  </ng-container>
+
+   <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <td mat-cell *matCellDef="let element">{{element.status}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="indices">
+    <th mat-header-cell *matHeaderCellDef>Indices</th>
+    <td mat-cell *matCellDef="let element">{{element.indices}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="commentaire">
+    <th mat-header-cell *matHeaderCellDef>Commentaire(s)</th>
+    <td mat-cell *matCellDef="let element">{{element.indices}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>

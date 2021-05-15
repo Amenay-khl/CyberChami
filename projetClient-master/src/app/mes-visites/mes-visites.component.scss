@@ -1,0 +1,22 @@
+.tab_visite{
+  width: 100%;
+}
+
+button{
+  text-align: center;
+  border: 1px solid transparent;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s;
+
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+
+
+}
+
+button.selected {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}

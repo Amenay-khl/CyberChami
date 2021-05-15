@@ -1,0 +1,85 @@
+<div *ngIf="combine | async as S">
+
+  <mat-toolbar style="background-color: #3fbcf0;">
+
+    <!--<app-media></app-media>-->
+
+    <!-- Affichage des barres de deplacement -->
+    <img style="margin-left: 7%;" [src]="dataIconCyberChamis" width="50" height="50"/>
+
+    <a href="#" routerLink="/" style="text-decoration:none; margin-left: 1%;color: white;font-size: 26px;font-family: 'Noto Sans','Arial','Helvetica','sans-serif';font-weight: bold;">
+      CyberChamis
+    </a>
+
+    <a href="#" routerLink="/" style="text-decoration:none; margin-left: 3%;color: white;font-size: 15px;font-family: 'Noto Sans','Arial','Helvetica','sans-serif';font-weight: bold;">
+      Rechercher un Défi
+    </a>
+
+    <a href="#" routerLink="/MesDefis" style="text-decoration:none; margin-left: 2%;color: white;font-size: 15px;font-family: 'Noto Sans','Arial','Helvetica','sans-serif';font-weight: bold;">
+      Mes Défis
+    </a>
+
+    <a href="#" routerLink="/MesVisites" style="text-decoration:none; margin-left: 2%;color: white;font-size: 15px;font-family: 'Noto Sans','Arial','Helvetica','sans-serif';font-weight: bold;">
+      Mes Visites
+    </a>
+
+    <a href="#" routerLink="/Communauté" style="text-decoration:none; margin-left: 2%;color: white;font-size: 15px;font-family: 'Noto Sans','Arial','Helvetica','sans-serif';font-weight: bold;">
+      Communauté
+    </a>
+
+    <!-- Affichage du logo -->
+    <label style="margin-left: 35%;" *ngIf="S.isLoggedIn">
+      <img class="imgGoogle" src={{S.photoURL}}/>
+    </label>
+    <mat-icon style="margin-left: 35%;" *ngIf="!S.isLoggedIn">
+      account_circle
+    </mat-icon>
+
+    <!-- Affichage du pseudo -->
+    <a *ngIf="S.isLoggedIn" style="margin-left: 1%;color:white;font-size: 15px;font-family: 'Noto Sans','Arial','Helvetica','sans-serif';font-weight: bold;">
+      {{getPseudo(S.chami)}}
+    </a>
+
+    <!-- Affichage de la selection -->
+    <mat-icon *ngIf="!S.isLoggedIn" style="margin-left: 3%;color:white;" [matMenuTriggerFor]="CompteDeconnecter">
+      keyboard_arrow_down
+    </mat-icon>
+
+    <mat-icon *ngIf="S.isLoggedIn" style="margin-left: 3%;color:white;" [matMenuTriggerFor]="CompteConnecter">
+      keyboard_arrow_down
+    </mat-icon>
+
+    <!-- Affichage des choix si aucun compte est connecter -->
+    <mat-menu #CompteDeconnecter="matMenu">
+      <button mat-menu-item (click)="login()">
+        <img [src]="dataIconGoogle" width="24" height="24" />
+        &nbsp;
+        <span>Compte Google</span>
+      </button>
+    </mat-menu>
+
+    <!-- Affichage des choix si un compte est connecter -->
+    <mat-menu #CompteConnecter="matMenu">
+      <button mat-menu-item>
+        <mat-icon>home</mat-icon>
+        <span><a style="text-decoration:none;" href="#" routerLink="/MonCompte">Mon compte</a></span>
+      </button>
+
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Déconnexion</span>
+      </button>
+    </mat-menu>
+
+  </mat-toolbar>
+
+  <!-- Affichage des page en fonction de la routine -->
+  <div *ngIf="!S.estInscrit">
+      <app-inscription [chamiId]="S.chami" (valeur)="maj($event)"></app-inscription>
+  </div >
+  <div *ngIf="S.estInscrit">
+    <mat-drawer-container>
+      <router-outlet></router-outlet>
+    </mat-drawer-container>
+  </div>
+</div>

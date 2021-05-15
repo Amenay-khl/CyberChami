@@ -1,0 +1,10 @@
+<p>Entrer votre image</p>
+  <input type="file"
+  id="file"
+  #userPhoto
+  (change)="upload($event)"
+  name="image"
+  autocomplete="off"
+  />
+  <button (click)="onFileSelected()">upload</button>
+

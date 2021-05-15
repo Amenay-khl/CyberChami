@@ -1,0 +1,37 @@
+<!--
+<mat-drawer-content *ngIf="S.isLoggedIn">
+  <div *ngIf="estInscrit|async as i">
+    <app-inscription [chamiId]="S.chami" (valeur)="maj($event)"></app-inscription>
+  </div>
+</mat-drawer-content>-->
+
+<mat-drawer-content>
+  <mat-grid-list cols="3" rowHeight="2:2">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <app-carte></app-carte>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <div style="height: 90%; overflow: auto; width: 100%">
+        <app-defis [StylePage]="1"></app-defis>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-drawer-content>
+
+<app-visite_en_cours></app-visite_en_cours>
+<!--
+  <mat-drawer-content *ngIf="page===1">
+      <mat-grid-list cols="3" rowHeight="2:2">
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <app-carte></app-carte>
+        </mat-grid-tile>
+
+        <mat-grid-tile  [colspan]="2" [rowspan]="1">
+          <div style="height: 90%; overflow: auto;width: 100%;">
+            <app-defis [chamiId]="S.chami" [StylePage]="page"></app-defis>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-drawer-content>
+-->

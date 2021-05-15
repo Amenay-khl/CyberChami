@@ -1,0 +1,49 @@
+
+<div class="aligne">
+  <mat-card>
+    <form (ngSubmit)="addChami(age.value,description.value,ville.value)" [formGroup]="profileForm">
+    <mat-card-title>Mon Compte Chamis</mat-card-title>
+    <p>
+      <mat-form-field appearance="legacy">
+        <mat-label>pseudo</mat-label>
+        <input matInput disabled placeholder="Placeholder" [value]="pseudo" />
+        <mat-icon matSuffix>account_box</mat-icon>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field>
+        <mat-label>Ma description</mat-label>
+        <textarea matInput placeholder="Ex : J'aime les tullipes" #description></textarea>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="standard">
+        <mat-label>Age</mat-label>
+        <input matInput type="number" placeholder="Placeholder" #age name="age" formControlName="age" required/>
+        <mat-icon matSuffix>calendar_today</mat-icon>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="standard">
+        <mat-label>Ville</mat-label>
+        <input matInput placeholder="Placeholder" #ville formControlName="ville" required/>
+        <mat-icon matSuffix>pin_drop</mat-icon>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="standard">
+        <mat-label>Adresse Mail</mat-label>
+        <input matInput disabled placeholder="Placeholder" [value]="email"/>
+        <mat-icon matSuffix>email icon</mat-icon>
+      </mat-form-field>
+    </p>
+    <div mat-dialog-actions>
+      <button *ngIf="profileForm.status==='VALID'" mat-button cdkFocusInitial  >Terminer l'inscription</button>
+    </div>
+  </form>
+  </mat-card>
+
+</div>
+

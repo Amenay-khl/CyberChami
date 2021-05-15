@@ -1,0 +1,54 @@
+tr.detail-row {
+  height: 0;
+}
+
+.table_defi{
+  width: 100%;
+  height: 50%;
+  overflow: auto;
+}
+
+.page1 {
+  width: 50%;
+}
+
+.page2 {
+  width: 100%;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.elementrow td {
+  border-bottom-width: 0;
+}
+
+.elementdetail {
+  overflow: hidden;
+  display: flex;
+}
+
+.groupeInformation {
+  height: 200px;
+  width: 500px;
+  font-size: 1.15em;
+  margin-top: 7px;
+}
+
+.groupeInformation2 {
+  height: 200px;
+  width: 300px;
+
+  .mat-list-item {
+    height: 25px;
+  }
+}
+
+.ind{
+  margin-left: 4em;
+}

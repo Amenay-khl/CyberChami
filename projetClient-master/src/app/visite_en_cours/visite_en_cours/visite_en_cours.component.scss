@@ -1,0 +1,33 @@
+#card{
+  height:auto;
+  width: 90%;
+}
+#titre{
+  text-decoration:underline, bold;
+  text-align:center;
+  margin-left: 25%;
+  color: #3fbcf0;
+  font-size: 1.5vw;
+}
+#content{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1vw;
+
+}
+.blured{
+  font-size: 1vw;
+  filter: blur(0.5vw);
+  -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+  }
+  .nonSelectionnable
+  {
+   -moz-user-select: none; /* Firefox */
+   -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
+   -ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
+   user-select: none; /* Propriété standard */
+  }

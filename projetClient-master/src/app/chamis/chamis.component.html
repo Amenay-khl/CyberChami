@@ -1,0 +1,15 @@
+
+<div>Liste des Chamis existant :</div>
+<br/>
+<table >
+  <thead>
+    <tr>
+      <td>Pseudo</td><td>Age</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let chami of chamis | async">
+      <td>{{chami.pseudo}}</td><td>{{chami.age}}</td>
+    </tr>
+  </tbody>
+</table>

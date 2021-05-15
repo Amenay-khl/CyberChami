@@ -1,0 +1,310 @@
+<h1 mat-dialog-title>Création de défi :</h1>
+
+<div *ngIf="page===false">
+
+  <table>
+    <!--Affichage du pseudo-->
+    <td>
+      <div mat-dialog-content>
+        <mat-form-field appearance="outline" style="width: 370px;">
+          <mat-label>Pseudo (verrouillé)</mat-label>
+          <input matInput disabled value={{defi.auteur}}>
+        </mat-form-field>
+      </div>
+    </td>
+    <!--Affichage de la ville-->
+    <td>
+      <div mat-dialog-content>
+        <mat-form-field appearance="outline" style="width: 384px;">
+          <mat-label>Ville (verrouillé)</mat-label>
+          <input matInput disabled value=Grenoble>
+        </mat-form-field>
+      </div>
+    </td>
+
+  </table>
+
+  <table>
+    <tr>
+      <!--Champ pour le titre-->
+      <td>
+        <div mat-dialog-content>
+          <mat-form-field appearance="outline" style="width: 370px;">
+            <mat-label>Titre</mat-label>
+            <input matInput [(ngModel)]="defi.titre" required>
+          </mat-form-field>
+        </div>
+      </td>
+      <!--Champ pour le type-->
+      <td>
+        <div mat-dialog-content class="type">
+          <mat-form-field appearance="outline" style="width: 384px;">
+            <mat-label>Type</mat-label>
+            <mat-select [(ngModel)]="defi.type" required>
+              <mat-option *ngFor="let typeOption of typeOptions" [value]="typeOption">
+                {{typeOption}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </td>
+
+    </tr>
+  </table>
+
+  <table>
+    <td>
+      <!--Champ pour les arret-->
+      <div mat-dialog-content>
+        <mat-form-field appearance="outline" style="width: 270px;">
+          <mat-label>Arrêt</mat-label>
+          <mat-select [(ngModel)]="defi.arret" required>
+            <mat-option *ngFor="let arretOption of arretOptions | async" [value]="arretOption.properties.LIBELLE">
+              {{arretOption.properties.LIBELLE }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </td>
+
+    <td>
+      <!--Demande de la posibilité de realisé en distanciel-->
+      <div style="margin-left: 20px;">
+            <mat-radio-group [(ngModel)]="defi.mode">
+              <table>
+                <td>
+                  <mat-radio-button value="presentiel">Présentiel</mat-radio-button>
+                </td>
+                <td>
+                  <mat-radio-button style="margin-left: 16px;" value="distanciel">Distanciel</mat-radio-button>
+                </td>
+              </table>
+            </mat-radio-group>
+      </div>
+    </td>
+
+    <td>
+      <div mat-dialog-content>
+        <mat-form-field appearance="outline" style="width: 240px;">
+          <mat-label>Lien Street View</mat-label>
+          <input matInput [disabled]="defi.mode==='presentiel'" [required]="defi.mode==='distanciel'" [(ngModel)]="defi.distanciel">
+        </mat-form-field>
+      </div>
+    </td>
+
+  </table>
+
+  <table>
+    <td>
+      <!--Champ pour les mots clés-->
+      <div mat-dialog-content>
+        <mat-form-field appearance="outline" style="width: 500px;">
+          <mat-label>Mots clés</mat-label>
+          <mat-chip-list #chipList aria-label="Liste des mots clés">
+            <mat-chip *ngFor="let mot of defi.motsCles" [selectable]="true"
+                [removable]="true" (removed)="delListeMotsCles(mot,defi.motsCles)">
+              {{mot.label}}
+              <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Ajoute un mot..."
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="true"
+                   (matChipInputTokenEnd)="ajouteListeMotsCles($event, defi.motsCles)">
+          </mat-chip-list>
+        </mat-form-field>
+      </div>
+    </td>
+
+    <td>
+      <!--Champ pour la durée-->
+      <div mat-dialog-content>
+        <mat-form-field appearance="outline" style="width: 110px;">
+          <mat-label>Durée</mat-label>
+          <input matInput [(ngModel)]="defi.duree" required>
+        </mat-form-field>
+      </div>
+    </td>
+
+    <td>
+      <!--Champ pour les points-->
+      <div mat-dialog-content>
+        <mat-form-field appearance="outline" style="width: 110px;">
+          <mat-label>Points</mat-label>
+          <input matInput [(ngModel)]="defi.points" required>
+        </mat-form-field>
+      </div>
+    </td>
+
+  </table>
+
+  <table>
+    <td>
+      <!--Champ pour la description-->
+      <div mat-dialog-content>
+        <mat-form-field appearance="outline" class="description-box" style="width: 500px;">
+          <mat-label>Description</mat-label>
+          <textarea matInput style="resize: none;"  type="text" id="form107" class="md-textarea form-control" rows="5" [(ngModel)]="defi.description" required></textarea>
+        </mat-form-field>
+      </div>
+    </td>
+
+    <td>
+      <!--Champ pour le materials-->
+      <div mat-dialog-content>
+        <mat-form-field appearance="outline" class="description-box" style="width: 250px;">
+          <mat-label>Materiels</mat-label>
+          <textarea matInput style="resize: none;" type="text" id="form107" class="md-textarea form-control" rows="5" [(ngModel)]="defi.materiels"></textarea>
+        </mat-form-field>
+      </div>
+    </td>
+
+  </table>
+  <!--Bouton-->
+  <div mat-dialog-actions style="margin: 0px 0px 0px 40px;" >
+    <button mat-button (click)="onNoClick()">Annuler</button>
+    <button mat-button (click)="page=true" cdkFocusInitial>Suivant</button>
+  </div>
+
+</div>
+
+<div *ngIf="page===true">
+  <table>
+    <!--Champ pour remplir les indices-->
+    <td>
+      <!--Affichage des indices-->
+      <tr>
+        <div mat-dialog-content>
+          <mat-form-field appearance="standard" style="width: 370px;">
+            <mat-label *ngIf="defi.indices.length>0">Liste des indices</mat-label>
+            <mat-chip-list #chipList aria-label="Fish selection">
+              <mat-chip *ngFor="let indice of defi.indices" [selectable]="true"
+                       [removable]="true" (removed)="delListeIndice(indice, defi.indices)">
+                {{indice.label}}
+                <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+      </tr>
+
+      <tr>
+        <div mat-dialog-content>
+          <mat-form-field appearance="outline" style="width: 255px;">
+            <mat-label>Type Indices (verrouiller)</mat-label>
+            <input matInput disabled value=Indice style="height: 20px;">
+          </mat-form-field>
+          <button mat-button color="warn" (click)="ajouteListeIndice(defi.indices)">Ajoute indice</button>
+        </div>
+      </tr>
+
+      <tr>
+        <div mat-dialog-content style="margin-top:-30px;">
+          <mat-form-field appearance="outline" class="description-box" style="width: 255px;">
+            <mat-label>Description</mat-label>
+            <textarea matInput style="resize: none;height: 30px" type="text" id="form107" class="md-textarea form-control" rows="2" [(ngModel)]="indiceVide.description"></textarea>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="description-box" style="width: 113px;">
+            <mat-label>Couts en points</mat-label>
+            <input matInput [(ngModel)]="indiceVide.points" style="height: 30px;">
+          </mat-form-field>
+        </div>
+      </tr>
+    </td>
+
+    <!--Champ pour remplir les evaluations-->
+    <td>
+      <tr>
+        <div mat-dialog-content>
+          <!--Affichage des evaluations-->
+          <mat-form-field appearance="standard" style="width: 375px;">
+            <mat-label *ngIf="defi.evaluations.length>0">Liste des evalutations</mat-label>
+            <mat-chip-list #chipList aria-label="Fish selection">
+              <mat-chip *ngFor="let eval of defi.evaluations" [selectable]="true"
+                       [removable]="true" (removed)="delListeEval(eval, defi.evaluations)">
+                {{eval.label}}
+                <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+      </tr>
+
+      <tr>
+        <div mat-dialog-content>
+          <mat-form-field appearance="outline" style="width: 255px;">
+            <mat-label>Type evaluation</mat-label>
+            <mat-select [(ngModel)]="evalVide.type">
+              <mat-option *ngFor="let typeEval of typeEvals" [value]="typeEval">
+                {{typeEval}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-button color="warn" (click)="ajouteListeEval(defi.evaluations)">Ajoute evaluation</button>
+        </div>
+      </tr>
+
+      <tr>
+        <div mat-dialog-content style="margin-top:-30px;">
+          <mat-form-field appearance="outline" class="description-box" style="width: 255px;">
+            <mat-label *ngIf="evalVide.type==='Question'">Question</mat-label>
+            <mat-label *ngIf="evalVide.type==='Photo'">Description</mat-label>
+            <textarea matInput style="resize: none;height: 30px;" type="text" id="form107" class="md-textarea form-control" rows="2" [(ngModel)]="evalVide.description"></textarea>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="description-box" style="width: 113px;">
+            <mat-label>Valeur en points</mat-label>
+            <input matInput [(ngModel)]="evalVide.points" style="height: 30px;">
+          </mat-form-field>
+        </div>
+      </tr>
+
+      <tr *ngIf="evalVide.type==='Question'">
+        <div mat-dialog-content style="margin-top:-30px ;">
+          <mat-form-field appearance="outline" class="description-box" style="width: 375px;">
+            <mat-label>Réponse</mat-label>
+            <textarea matInput style="resize: none;height: 20px;" type="text" id="form107" class="md-textarea form-control" rows="2" [(ngModel)]="evalVide.bonneReponse"></textarea>
+          </mat-form-field>
+        </div>
+      </tr>
+
+    </td>
+  </table>
+
+  <table>
+    <td>
+      <!--Champ pour le prologue-->
+      <div mat-dialog-content>
+        <mat-form-field appearance="outline" class="description-box" style="width: 375px;">
+          <mat-label>Prologue</mat-label>
+          <textarea matInput style="resize: none;" type="text" id="form107" class="md-textarea form-control" rows="3" [(ngModel)]="defi.prologue"></textarea>
+        </mat-form-field>
+      </div>
+    </td>
+
+    <td>
+      <!--Champ pour l'epilogue-->
+      <div mat-dialog-content>
+        <mat-form-field appearance="outline" class="description-box" style="width: 375px;">
+          <mat-label>Epilogue</mat-label>
+          <textarea matInput style="resize: none;" type="text" id="form107" class="md-textarea form-control" rows="3" [(ngModel)]="defi.epilogue"></textarea>
+        </mat-form-field>
+      </div>
+    </td>
+  </table>
+
+  <!--Champ pour le commentaire-->
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline" class="description-box" style="width: 784px;">
+      <mat-label>Commentaire</mat-label>
+      <input matInput [(ngModel)]="defi.commentaire">
+    </mat-form-field>
+  </div>
+
+  <!--Boutons-->
+  <div mat-dialog-actions style="margin: 0px 0px 0px 35px;" >
+    <button mat-button (click)="onNoClick()">Annuler</button>
+    <button mat-button (click)="page=false" cdkFocusInitial>Précedent</button>
+    <button mat-button style="margin-left:500px" [mat-dialog-close]="defi" cdkFocusInitial>Terminer</button>
+  </div>
+
+</div>

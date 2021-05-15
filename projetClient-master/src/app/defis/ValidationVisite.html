@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Souhaitez vous vraiment realisé le defi : {{data.def.titre}}</h1>
+<div mat-dialog-content>
+  <p>Une fois selectionner vous devrez completer le defi pour pouvoir en prendre un nouveau</p>
+</div>
+<mat-radio-group [(ngModel)]="data.mode">
+  <table>
+    <td>
+      <mat-radio-button value="presentiel">Présentiel</mat-radio-button>
+    </td>
+    <td>
+      <mat-radio-button style="margin-left: 16px;" value="distanciel" [disabled]="data.def.mode==='presentiel'">Distanciel</mat-radio-button>
+    </td>
+  </table>
+</mat-radio-group>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Valider</button>
+</div>

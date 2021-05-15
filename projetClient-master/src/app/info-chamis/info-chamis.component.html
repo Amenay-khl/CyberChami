@@ -1,0 +1,91 @@
+
+
+<div class="aligne" *ngIf="obs|async">
+
+  <h1>Mes Informations Clients</h1>
+
+</div>
+  <mat-list>
+    <mat-list-item>Pseudo</mat-list-item>
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        {{getChami().pseudo}}
+      </mat-list-item>
+    </mat-list>
+    <mat-divider></mat-divider>
+
+    <mat-list-item>Age</mat-list-item>
+    <mat-list *ngIf="!isEditing" role="list">
+      <mat-list-item role="listitem">
+        {{getChami().age}}
+        <button mat-button color="accent" (click)="isEditing=true">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-list *ngIf="isEditing" role="list">
+      <mat-form-field appearance="standard">
+        <mat-label>Modification</mat-label>
+        <form (ngSubmit)="isEditing=false;newAge(age.value)">
+          {{age.focus()}}
+          <input matInput type="number" #age value="{{getChami().age}}" name="age" (blur)="isEditing=false;newAge(age.value)" required/>
+        </form>
+      </mat-form-field>
+    </mat-list>
+
+    <mat-divider></mat-divider>
+
+    <mat-list-item>Ville</mat-list-item>
+    <mat-list *ngIf="!isEditing1" role="list">
+      <mat-list-item role="listitem">
+        {{getChami().ville}}
+        <button mat-button (click)="isEditing1=true" color="accent">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-list *ngIf="isEditing1" role="list">
+      <mat-form-field appearance="standard">
+        <mat-label>Modification</mat-label>
+        <form (ngSubmit)="isEditing1=false;updateProfil()">
+          {{ville.focus()}}
+          <input matInput #ville placeholder="Placeholder" name="ville" [(ngModel)]="getChami().ville" (blur)="isEditing1=false;updateProfil()"/>
+        </form>
+      </mat-form-field>
+    </mat-list>
+
+    <mat-divider></mat-divider>
+
+    <mat-list-item>Description</mat-list-item>
+    <mat-list *ngIf="!isEditing2" role="list">
+      <mat-list-item role="listitem">
+        {{getChami().description}}
+        <button mat-button (click)="isEditing2=true" color="accent">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-list *ngIf="isEditing2" role="list">
+      <mat-form-field class="description">
+        <mat-label>Modification</mat-label>
+        <form (ngSubmit)="isEditing2=false;updateProfil()">
+          {{description.focus()}}
+          <input matInput #description name="description" [(ngModel)]="getChami().description" (blur)="isEditing2=false;updateProfil()"/>
+        </form>
+      </mat-form-field>
+    </mat-list>
+
+    <mat-divider></mat-divider>
+
+    <mat-list-item>Adresse Mail</mat-list-item>
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        {{getChami().email}}
+      </mat-list-item>
+    </mat-list>
+  </mat-list>
+
+

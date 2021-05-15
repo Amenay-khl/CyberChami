@@ -1,0 +1,8 @@
+<h1 *ngIf="defiImport === undefined">Creer un defi :</h1>
+<button mat-raised-button *ngIf="defiImport === undefined" (click)="openNewForm()">
+  Creation d'un defi
+</button>
+
+<button mat-raised-button *ngIf="defiImport !== undefined && defiImport.auteur === getPseudo()" (click)="openEditedForm()" mat-icon-button>
+  <mat-icon>mode_edit</mat-icon>
+</button>
